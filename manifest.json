@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Smart Outliner - 智能网页大纲",
-  "version": "1.0",
+  "version": "1.1",
   "description": "实时展示当前网页的大纲结构",
   "permissions": [
     "storage",
