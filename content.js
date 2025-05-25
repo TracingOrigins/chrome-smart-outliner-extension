@@ -793,7 +793,7 @@ async function setupObservers() {
           try {
             await sendMessageWithRetry({
               action: 'updateOutline',
-              outline: outline
+              outline: outline,
             });
           } catch (error) {
             if (error.message && error.message.includes('Extension context invalidated')) {

@@ -54,8 +54,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
       
       // 根据页面类型决定显示方式
-        // console.log('非特殊页面，显示标题结构');
-        displayOutline(request.outline);
+      // console.log('非特殊页面，显示标题结构');
+      const searchTerm = getSearchTerm();
+      displayOutline(request.outline, searchTerm);
     }
   } else if (request.action === 'activeHeading') {
     // 收到活动标题更新，立即高亮
@@ -790,4 +791,20 @@ style.textContent = `
     color: var(--text-color);
   }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// 获取搜索框中的文字
+function getSearchTerm() {
+  const searchInput = document.querySelector('#outline-search');
+  if (!searchInput) {
+    return '';
+  }
+  
+  // 检查搜索框是否可见
+  const style = window.getComputedStyle(searchInput);
+  if (style.display === 'none' || style.visibility === 'hidden' || style.opacity === '0') {
+    return '';
+  }
+  
+  return searchInput.value || '';
+} 
