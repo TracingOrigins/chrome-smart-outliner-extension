@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Outliner 选项</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --border-color: #eeeeee;
+      --hover-bg-color: #f0f0f0;
+      --active-bg-color: #e0e0e0;
+      --button-bg: #f5f5f5;
+      --button-hover-bg: #e0e0e0;
+      --button-text: #333333;
+      --input-border: #cccccc;
+      --input-focus-border: #0078d4;
+      --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --scrollbar-track: #f1f1f1;
+      --scrollbar-thumb: #888888;
+      --scrollbar-thumb-hover: #555555;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #1a1a1a;
+        --text-color: #e0e0e0;
+        --border-color: #333333;
+        --hover-bg-color: #2a2a2a;
+        --active-bg-color: #3a3a3a;
+        --button-bg: #333333;
+        --button-hover-bg: #444444;
+        --button-text: #e0e0e0;
+        --input-border: #444444;
+        --input-focus-border: #0078d4;
+        --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --scrollbar-track: #2a2a2a;
+        --scrollbar-thumb: #666666;
+        --scrollbar-thumb-hover: #888888;
+      }
+    }
+
+    /* 添加滚动条样式 */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-thumb-hover);
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 15px 0;
+    }
+
+    .card {
+      background-color: var(--bg-color);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    p {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: var(--input-focus-border);
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--button-hover-bg);
+    }
+
+    .website-list {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .website-item {
+      padding: 10px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .website-item:last-child {
+      border-bottom: none;
+    }
+
+    .btn-remove {
+      color: #f44336;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .empty-message {
+      padding: 15px;
+      text-align: center;
+      color: #888;
+    }
+
+    .help-text {
+      font-size: 13px;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    .status-message {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .success {
+      background-color: rgba(76, 175, 80, 0.1);
+      color: #4CAF50;
+    }
+
+    .info {
+      background-color: rgba(33, 150, 243, 0.1);
+      color: #2196F3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Smart Outliner 选项</h1>
+    
+    <div class="card">
+      <h2>网站列表</h2>
+      <p>添加您希望检测所有标题的网站域名（不在列表中的网站将只检测标准内容区域的标题）</p>
+      
+      <div class="form-group">
+        <label for="website">网站域名:</label>
+        <input type="text" id="website" placeholder="例如: example.com">
+        <div class="help-text">无需添加 https:// 或 www. 前缀，只需输入域名部分</div>
+      </div>
+      
+      <button id="add-website">添加网站</button>
+      
+      <div id="status-message" class="status-message" style="display: none;"></div>
+      
+      <h3>已添加的网站</h3>
+      <div class="website-list" id="website-list">
+        <!-- 这里将动态填充网站列表 -->
+        <div class="empty-message">暂无添加的网站</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>特殊页面列表</h2>
+      <p>添加不需要检测大纲的特殊页面（如Chrome内部页面、扩展页面等）</p>
+      
+      <div class="form-group">
+        <label for="special-page">特殊页面URL:</label>
+        <input type="text" id="special-page" placeholder="例如: chrome://extensions/">
+        <div class="help-text">请输入完整的URL，包括协议部分</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="special-page-type">页面类型:</label>
+        <input type="text" id="special-page-type" placeholder="例如: 扩展管理页面">
+      </div>
+      
+      <div class="form-group">
+        <label for="special-page-message">提示信息:</label>
+        <input type="text" id="special-page-message" placeholder="例如: 扩展管理页面不支持大纲检测，请访问普通网页">
+      </div>
+      
+      <button id="add-special-page">添加特殊页面</button>
+      <button id="restore-default-special-pages">恢复默认设置</button>
+      
+      <div id="special-page-status-message" class="status-message" style="display: none;"></div>
+      
+      <h3>已添加的特殊页面</h3>
+      <div class="website-list" id="special-page-list">
+        <!-- 这里将动态填充特殊页面列表 -->
+        <div class="empty-message">暂无添加的特殊页面</div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>关于</h2>
+      <p>大纲插件根据配置的网站列表，决定是否检测页面上的所有标题：</p>
+      <ul>
+        <li>对于列表中的网站：检测页面上的<strong>所有</strong>标题</li>
+        <li>对于其他网站：只检测标准内容区域（如 &lt;main&gt;, &lt;article&gt; 等）中的标题</li>
+      </ul>
+      <p>这有助于在复杂页面上生成更清晰的大纲，同时为您关注的特定网站提供完整大纲。</p>
+    </div>
+  </div>
+  
+  <script src="options.js" type="module"></script>
+</body>
+</html> 
