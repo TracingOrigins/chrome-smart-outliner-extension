@@ -5,7 +5,6 @@
   "description": "实时展示当前网页的大纲结构",
   "permissions": [
     "storage",
-    "activeTab",
     "sidePanel",
     "tabs"
   ],
