@@ -71,16 +71,6 @@ const DEFAULT_SPECIAL_PAGES = [
     message: '开发者工具页面不支持大纲检测，请访问普通网页'
   },
   {
-    url: 'https://chrome.google.com/webstore',
-    type: 'Chrome商店页面',
-    message: 'Chrome商店页面不支持大纲检测，请访问普通网页'
-  },
-  {
-    url: 'https://chrome.google.com/extensions',
-    type: '扩展管理页面',
-    message: '扩展管理页面不支持大纲检测，请访问普通网页'
-  },
-  {
     url: 'https://chromewebstore.google.com',
     type: 'Chrome商店页面',
     message: 'Chrome商店页面不支持大纲检测，请访问普通网页'
