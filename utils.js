@@ -64,7 +64,6 @@ export async function handleGetOutlineRequest({ url, tabId, sendResponse }) {
     }, (response) => {
       if (chrome.runtime.lastError) {
         // console.error('获取大纲失败:', chrome.runtime.lastError);
-        chrome.tabs.reload(tabId);
         sendResponse({ outline: [] });
         return;
       }

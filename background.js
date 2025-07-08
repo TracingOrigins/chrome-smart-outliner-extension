@@ -63,7 +63,6 @@ chrome.tabs.onActivated.addListener(async (activeInfo) => {
       chrome.tabs.sendMessage(tabId, { action: 'getOutline' }, (response) => {
         if (chrome.runtime.lastError) {
           // console.error('获取大纲失败:', chrome.runtime.lastError);
-          chrome.tabs.reload(tabId);
           return;
         }
         
